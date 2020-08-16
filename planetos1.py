@@ -1,5 +1,6 @@
 import requests
 import json
+import csv
 
 # 'noaa_gfs_global_sflux_0.12d”は気象データのID
 url = 'http://api.planetos.com/v1/datasets/noaa_gfs_global_sflux_0.12d/point'
@@ -17,8 +18,6 @@ querystring = {
 response = requests.get(url,params=querystring)
 print(response.text)    #.textで取得data表示はできる
 
-#data = json.loads( response.text )
-
 #jsonデータで取得
 r = requests.get(url,params=querystring)
 weather_data = r.json()
@@ -30,3 +29,9 @@ print(latitude)
 #timeminを取得してみる
 timeMin = weather_data['stats']['timeMin']
 print(timeMin)
+
+#csvに保存
+f = open('tstt_csv','w')
+writer = csv.writer(f)
+writer.writerow([latitude,timeMin,'テスト'])   #配列です
+f.close()
