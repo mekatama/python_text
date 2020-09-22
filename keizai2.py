@@ -52,16 +52,59 @@ kakaku = soup.find("span",class_="price")
 temp01 = kakaku.text
 tousin01 = int(temp01.replace(",",""))
 
+#=================================================================
 # Alpha Vantageから株価を取得
 # 吉野家ＨＬＤＧ株価
 k01 = requests.get('https://www.alphavantage.co/query?function=GLOBAL_QUOTE&symbol=9861.T&apikey=9C61LRH22KOSAPQO')
 k01a = k01.json()
 kabuka_yosinoya = k01a['Global Quote']['05. price']
+# ビックカメラ株価
+k02 = requests.get('https://www.alphavantage.co/query?function=GLOBAL_QUOTE&symbol=3048.T&apikey=9C61LRH22KOSAPQO')
+k02a = k02.json()
+kabuka_biccamera = k02a['Global Quote']['05. price']
+# フジ日本精糖株価
+k03 = requests.get('https://www.alphavantage.co/query?function=GLOBAL_QUOTE&symbol=2114.T&apikey=9C61LRH22KOSAPQO')
+k03a = k03.json()
+kabuka_fnihonseitou = k03a['Global Quote']['05. price']
+# イオン株価
+k04 = requests.get('https://www.alphavantage.co/query?function=GLOBAL_QUOTE&symbol=8267.T&apikey=9C61LRH22KOSAPQO')
+k04a = k04.json()
+kabuka_aeon = k04a['Global Quote']['05. price']
+# 飯田グループHLDG株価
+k05 = requests.get('https://www.alphavantage.co/query?function=GLOBAL_QUOTE&symbol=3291.T&apikey=9C61LRH22KOSAPQO')
+k05a = k05.json()
+kabuka_iida = k05a['Global Quote']['05. price']
+# タカラレーベン株価
+k06 = requests.get('https://www.alphavantage.co/query?function=GLOBAL_QUOTE&symbol=8897.T&apikey=9C61LRH22KOSAPQO')
+k06a = k06.json()
+kabuka_takaraleben = k06a['Global Quote']['05. price']
+# グローセル株価
+k07 = requests.get('https://www.alphavantage.co/query?function=GLOBAL_QUOTE&symbol=9995.T&apikey=9C61LRH22KOSAPQO')
+k07a = k07.json()
+kabuka_glosel = k07a['Global Quote']['05. price']
+# スカイラークHLDG株価
+k08 = requests.get('https://www.alphavantage.co/query?function=GLOBAL_QUOTE&symbol=9995.T&apikey=9C61LRH22KOSAPQO')
+k08a = k08.json()
+kabuka_skylark = k08a['Global Quote']['05. price']
 
 
 #=================================================================
 #csvに保存
 f = open('keizai_csv','w')
 writer = csv.writer(f)
-writer.writerow([usd,aud,eur,nikkei,dau,tousin01,kabuka_yosinoya])   #配列です
+writer.writerow([
+    usd,
+    aud,
+    eur,
+    nikkei,
+    dau,
+    tousin01,
+    kabuka_yosinoya,
+    kabuka_biccamera,
+    kabuka_fnihonseitou,
+    kabuka_aeon,
+    kabuka_iida,
+    kabuka_takaraleben,
+    kabuka_glosel,
+    kabuka_skylark])   #配列です
 f.close()
